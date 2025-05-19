@@ -1,0 +1,290 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Moon Stablecoin</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        
+    </style>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            
+            let mobileMenuOpen = false;
+            let activePage = 'home';
+            
+            
+            function toggleMobileMenu() {
+                mobileMenuOpen = !mobileMenuOpen;
+                updateMobileMenu();
+            }
+            
+            function setPage(page) {
+                activePage = page.toLowerCase();
+                mobileMenuOpen = false;
+                updateActivePage();
+                updateMobileMenu();
+            }
+            
+            function updateMobileMenu() {
+                const menu = document.getElementById('mobile-menu');
+                const menuButton = document.querySelector('[aria-label="Mobile menu"] svg');
+                
+                if (mobileMenuOpen) {
+                    menu.classList.remove('hidden');
+                    menuButton.innerHTML = '<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />';
+                } else {
+                    menu.classList.add('hidden');
+                    menuButton.innerHTML = '<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />';
+                }
+            }
+            
+            function updateActivePage() {
+                document.querySelectorAll('nav a').forEach(link => {
+                    const page = link.textContent.toLowerCase();
+                    if (page === activePage) {
+                        link.classList.add('text-blue-400');
+                        link.classList.remove('text-white');
+                    } else {
+                        link.classList.remove('text-blue-400');
+                        link.classList.add('text-white');
+                    }
+                });
+                
+                document.querySelectorAll('[data-page]').forEach(section => {
+                    if (section.dataset.page === activePage) {
+                        section.classList.remove('hidden');
+                    } else {
+                        section.classList.add('hidden');
+                    }
+                });
+            }
+            
+            document.querySelector('[aria-label="Mobile menu"]').addEventListener('click', toggleMobileMenu);
+            
+            document.querySelectorAll('nav a').forEach(link => {
+                link.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    setPage(this.textContent);
+                });
+            });
+            updateActivePage();
+        });
+    </script>
+</head>
+<body class="min-h-screen bg-black text-white font-sans">
+    
+    <header class="bg-black border-b border-gray-800 sticky top-0 z-50">
+        <div class="container mx-auto px-4 py-3 flex justify-between items-center">
+            <div class="flex items-center space-x-2">
+                <img src="Terra (LUNA).png" alt="Logo" class="h-10">
+            </div>
+
+           
+            <nav class="hidden md:flex items-center space-x-6 text-sm">
+                <a href="#" class="text-blue-400 hover:text-blue-400 transition-colors">Home</a>
+                <a href="#" class="text-white hover:text-blue-400 transition-colors">About Moon</a>
+                <a href="#" class="text-white hover:text-blue-400 transition-colors">How It Works</a>
+                <a href="#" class="text-white hover:text-blue-400 transition-colors">Markets</a>
+                <a href="#" class="text-white hover:text-blue-400 transition-colors">Trade</a>
+                <a href="#" class="text-white hover:text-blue-400 transition-colors">Earn</a>
+                <a href="#" class="text-white hover:text-blue-400 transition-colors">Support</a>
+                <button class="bg-yellow-400 text-black font-medium px-4 py-2 rounded-md hover:bg-yellow-300 transition-colors">
+                    Connect Wallet
+                </button>
+            </nav>
+
+            <button class="md:hidden focus:outline-none" aria-label="Mobile menu">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
+                </svg>
+            </button>
+        </div>
+
+        <div id="mobile-menu" class="hidden md:hidden bg-black border-t border-gray-800 pb-4 px-4">
+            <nav class="flex flex-col space-y-3 text-sm">
+                <a href="#" class="text-blue-400 hover:text-blue-400 transition-colors">Home</a>
+                <a href="#" class="text-white hover:text-blue-400 transition-colors">About Moon</a>
+                <a href="#" class="text-white hover:text-blue-400 transition-colors">How It Works</a>
+                <a href="#" class="text-white hover:text-blue-400 transition-colors">Markets</a>
+                <a href="#" class="text-white hover:text-blue-400 transition-colors">Trade</a>
+                <a href="#" class="text-white hover:text-blue-400 transition-colors">Earn</a>
+                <a href="#" class="text-white hover:text-blue-400 transition-colors">Support</a>
+                <button class="mt-2 bg-yellow-400 text-black font-medium px-4 py-2 rounded-md self-start hover:bg-yellow-300 transition-colors">
+                    Connect Wallet
+                </button>
+            </nav>
+        </div>
+    </header>
+
+    
+    <main class="container mx-auto px-4 py-10">
+        
+        <section data-page="markets" class="py-10 hidden">
+            <h2 class="text-3xl font-bold mb-8 text-center">Market Overview</h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                
+                <div class="bg-gray-900 p-6 rounded-lg shadow-lg">
+                    <h3 class="text-xl font-semibold mb-4">Trading Volume (Last 7 Days)</h3>
+                    <div class="flex justify-between items-end h-40">
+                        <div class="flex flex-col items-center w-full">
+                            <div class="w-8 h-20 bg-blue-500 rounded-t"></div>
+                            <span class="text-xs mt-1">Mon</span>
+                        </div>
+                        <div class="flex flex-col items-center w-full">
+                            <div class="w-8 h-28 bg-blue-500 rounded-t"></div>
+                            <span class="text-xs mt-1">Tue</span>
+                        </div>
+                        <div class="flex flex-col items-center w-full">
+                            <div class="w-8 h-32 bg-blue-500 rounded-t"></div>
+                            <span class="text-xs mt-1">Wed</span>
+                        </div>
+                        <div class="flex flex-col items-center w-full">
+                            <div class="w-8 h-24 bg-blue-500 rounded-t"></div>
+                            <span class="text-xs mt-1">Thu</span>
+                        </div>
+                        <div class="flex flex-col items-center w-full">
+                            <div class="w-8 h-20 bg-blue-500 rounded-t"></div>
+                            <span class="text-xs mt-1">Fri</span>
+                        </div>
+                        <div class="flex flex-col items-center w-full">
+                            <div class="w-8 h-16 bg-blue-500 rounded-t"></div>
+                            <span class="text-xs mt-1">Sat</span>
+                        </div>
+                        <div class="flex flex-col items-center w-full">
+                            <div class="w-8 h-12 bg-blue-500 rounded-t"></div>
+                            <span class="text-xs mt-1">Sun</span>
+                        </div>
+                    </div>
+                </div>
+
+                
+                <div class="bg-gray-900 p-6 rounded-lg shadow-lg flex flex-col items-center">
+                    <h3 class="text-xl font-semibold mb-4">Market Distribution</h3>
+                    <div class="relative w-40 h-40 mb-4">
+                        <svg viewBox="0 0 100 100" class="w-full h-full">
+                           
+                            <path d="M50,50 L50,0 A50,50 0 0,1 93.3,25 Z" fill="#facc15" />
+                            
+                            <path d="M50,50 L93.3,25 A50,50 0 0,1 50,100 Z" fill="#3b82f6" />
+                           
+                            <path d="M50,50 L50,100 A50,50 0 0,1 50,0 Z" fill="#10b981" />
+                        </svg>
+                    </div>
+                    <div class="text-sm space-y-1">
+                        <p><span class="inline-block w-3 h-3 bg-yellow-400 mr-1"></span> Stablecoins: 40%</p>
+                        <p><span class="inline-block w-3 h-3 bg-blue-500 mr-1"></span> Altcoins: 35%</p>
+                        <p><span class="inline-block w-3 h-3 bg-green-500 mr-1"></span> Fiat: 25%</p>
+                    </div>
+                </div>
+            </div>
+
+            
+            <div class="bg-gray-900 p-6 rounded-lg shadow-lg mt-8">
+                <h3 class="text-xl font-semibold mb-4">Price Stability Over Time</h3>
+                <div class="h-40 relative">
+                    <svg width="100%" height="100%" viewBox="0 0 100 20" preserveAspectRatio="none">
+                        <polyline
+                            fill="none"
+                            stroke="#3b82f6"
+                            stroke-width="1"
+                            points="0,10 20,8 40,10 60,12 80,10 100,10"
+                        />
+                    </svg>
+                    <div class="absolute bottom-0 left-0 w-full h-[1px] bg-gray-700"></div>
+                </div>
+                <p class="text-sm text-gray-400 mt-2">The price of Moon remains consistently stable around $1.</p>
+            </div>
+        </section>
+
+       
+        <div data-page="home">
+            
+            <section class="bg-gradient-to-b from-black to-blue-600 py-20 text-center px-4">
+                <h1 class="text-4xl md:text-5xl font-bold leading-tight mb-4 max-w-3xl mx-auto">
+                    Introducing Moon: The Stablecoin with Parity to UDTS
+                </h1>
+                <p class="text-xl md:text-2xl mb-8 max-w-2xl mx-auto opacity-90">
+                    Backed by Alpha for Unmatched Stability and Liquidity
+                </p>
+                <div class="flex flex-col sm:flex-row gap-4 justify-center">
+                    <button class="bg-yellow-400 text-black font-semibold px-6 py-3 rounded-md hover:bg-yellow-300 transition-colors shadow-lg transform hover:-translate-y-1 duration-200">
+                        Trade Now
+                    </button>
+                    <button class="bg-purple-800 text-white font-semibold px-6 py-3 rounded-md hover:bg-purple-700 transition-colors shadow-lg transform hover:-translate-y-1 duration-200">
+                        Learn More
+                    </button>
+                </div>
+            </section>
+
+            
+            <section class="py-16 bg-black px-4">
+                <div class="container mx-auto max-w-6xl">
+                    <h2 class="text-3xl font-bold text-center mb-12">How It Works</h2>
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                        <div class="bg-gray-900 p-6 rounded-lg shadow-lg hover:shadow-xl transition-shadow">
+                            <h3 class="text-xl font-semibold mb-3">Reserva de Reservas</h3>
+                            <p class="text-gray-400">
+                                Moon es respaldada por una reserva de activos gestionada por Alpha.
+                            </p>
+                        </div>
+                        <div class="bg-gray-900 p-6 rounded-lg shadow-lg hover:shadow-xl transition-shadow">
+                            <h3 class="text-xl font-semibold mb-3">Mecanismos de Estabilización</h3>
+                            <p class="text-gray-400">
+                                Alpha utiliza contratos inteligentes para mantener la paridad con el UDTS.
+                            </p>
+                        </div>
+                        <div class="bg-gray-900 p-6 rounded-lg shadow-lg hover:shadow-xl transition-shadow">
+                            <h3 class="text-xl font-semibold mb-3">Transparencia y Auditorías</h3>
+                            <p class="text-gray-400">
+                                Las reservas de Moon son transparentes y auditadas regularmente.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </div>
+
+       
+        <div data-page="about moon" class="py-10 text-center hidden">
+            <h2 class="text-2xl font-bold">about moon Page</h2>
+            <p class="text-gray-400 mt-2">Contenido para la sección "about moon" vendrá pronto.</p>
+        </div>
+        
+        <div data-page="how it works" class="py-10 text-center hidden">
+            <h2 class="text-2xl font-bold">how it works Page</h2>
+            <p class="text-gray-400 mt-2">Contenido para la sección "how it works" vendrá pronto.</p>
+        </div>
+        
+        <div data-page="trade" class="py-10 text-center hidden">
+            <h2 class="text-2xl font-bold">trade Page</h2>
+            <p class="text-gray-400 mt-2">Contenido para la sección "trade" vendrá pronto.</p>
+        </div>
+        
+        <div data-page="earn" class="py-10 text-center hidden">
+            <h2 class="text-2xl font-bold">earn Page</h2>
+            <p class="text-gray-400 mt-2">Contenido para la sección "earn" vendrá pronto.</p>
+        </div>
+        
+        <div data-page="support" class="py-10 text-center hidden">
+            <h2 class="text-2xl font-bold">support Page</h2>
+            <p class="text-gray-400 mt-2">Contenido para la sección "support" vendrá pronto.</p>
+        </div>
+    </main>
+
+    <footer class="bg-black border-t border-gray-800 py-8 px-4 text-center text-gray-500">
+        <p>Contacto: info@moonstablecoin.com</p>
+        <p class="mt-2">
+            Redes Sociales:
+            <a href="#" class="text-blue-400 hover:underline">Twitter</a> |
+            <a href="#" class="text-blue-400 hover:underline">Discord</a>
+        </p>
+        <p class="mt-2">&copy; <span id="year"></span> Moon Stablecoin. Todos los derechos reservados.</p>
+    </footer>
+
+    <script>
+        document.getElementById('year').textContent = new Date().getFullYear();
+    </script>
+</body>
+</html>
